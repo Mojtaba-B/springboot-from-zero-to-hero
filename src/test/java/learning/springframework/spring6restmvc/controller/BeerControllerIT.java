@@ -58,7 +58,7 @@ class BeerControllerIT {
 
 
     @Test
-    void testListBeersByStyleAndNameShowInventoryTruePage2() throws Exception {
+    void tesListBeersByStyleAndNameShowInventoryTruePage2() throws Exception {
         mockMvc.perform(get(BeerController.BEER_PATH)
                         .queryParam("beerName", "IPA")
                         .queryParam("beerStyle", BeerStyle.IPA.name())
