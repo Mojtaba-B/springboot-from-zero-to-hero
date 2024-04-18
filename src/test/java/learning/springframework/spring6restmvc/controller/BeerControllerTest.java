@@ -69,7 +69,7 @@ class BeerControllerTest {
         Map<String, Object> beerMap = new HashMap<>();
         beerMap.put("beerName", "New Name");
 
-        mockMvc.perform(patch(BEER_PATH + beer.getId())
+        mockMvc.perform(patch(BEER_PATH + "/" + beer.getId())
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(beerMap)))
@@ -87,7 +87,7 @@ class BeerControllerTest {
         BeerDTO beer = beerServiceImpl.listBeers(null, null, false, 1, 25).getContent().get(0);
         given(beerService.deleteBeerById(any())).willReturn(true);
 
-        mockMvc.perform(delete(BEER_PATH + beer.getId())
+        mockMvc.perform(delete(BEER_PATH + "/" + beer.getId())
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
 
@@ -103,7 +103,7 @@ class BeerControllerTest {
 
         given(beerService.updateBeerById(any(), any())).willReturn(Optional.of(beer));
 
-        mockMvc.perform(put(BEER_PATH + beer.getId())
+        mockMvc.perform(put(BEER_PATH + "/" + beer.getId())
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(beer)))
@@ -155,7 +155,7 @@ class BeerControllerTest {
 
         given(beerService.updateBeerById(any(), any())).willReturn(Optional.of(beer));
 
-        mockMvc.perform(put(BEER_PATH + beer.getId())
+        mockMvc.perform(put(BEER_PATH + "/" + beer.getId())
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(beer)))
@@ -181,7 +181,7 @@ class BeerControllerTest {
         BeerDTO testBeer = beerServiceImpl.listBeers(null, null, false, 1, 25).getContent().get(0);
         given(beerService.getBeerById(testBeer.getId())).willReturn(Optional.of(testBeer));
 
-        mockMvc.perform(get(BEER_PATH + testBeer.getId())
+        mockMvc.perform(get(BEER_PATH + "/" + testBeer.getId())
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
